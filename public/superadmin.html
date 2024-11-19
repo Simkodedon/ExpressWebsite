@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Super Admin</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="generalcss.css" />
+    <link rel="stylesheet" href="footer.css" />
+
+</head>
+
+<body>
+    <div class="container" id="app">
+
+        <!-- NAVBAR BÖRJAR -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <img src="SG.png" alt="SG" style="width:60px;height: 50px;">
+                <a class="navbar-brand" href="index.html">SG Industries</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="products.html">Sale</a></li>
+                                <li><a class="dropdown-item" href="index.html">Home</a></li>
+                                <li><a class="dropdown-item" href="loginas.html">Logout</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="admin.html">Admin</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-dark">
+                <li class="breadcrumb-item active" aria-current="page">Home</li>
+                <li class="breadcrumb-item active" aria-current="page">Login</li>
+                <li class="breadcrumb-item active" aria-current="page">Super Admin</li>
+            </ol>
+        </nav> <!-- Breadcrumbs END -->
+
+        <!-- Navbar slutar-->
+
+
+
+        <!-- Början av Question Table-->
+
+
+        <h1 style="color: white;">Questions:</h1>
+
+        <div class="row justify-content-center" style="margin-top: 15px">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">QID</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Uploaded</th>
+                        <th scope="col">Answered by Username</th>
+                        <th scope="col">Answer</th>
+
+                    </tr>
+                </thead>
+                <tbody v-for="question in questions" v-bind:key="question.qid">
+                    <tr>
+
+                        <td>{{ question.qid }}
+                        </td>
+                        <td>{{ question.title }}</td>
+                        <td>{{ question.description }}</td>
+                        <td>{{ question.category }}</td>
+                        <td>{{ question.uploaded }}</td>
+                        <td>{{ question.username }}</td>
+                        <td> {{ question.answer}} </td>
+
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+
+
+        <!-- Slutet på table-->
+
+        <h1 style="color: white;">Consumers:</h1>
+
+        <!-- Consumer table-->
+
+        <div class="row justify-content-center" style="margin-top: 15px">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Block Status</th>
+
+
+                    </tr>
+                </thead>
+                <tbody v-for="consumer in consumers" v-bind:key="consumer.id">
+                    <tr>
+                        <td> {{ consumer.id }} </td>
+                        <td>{{ consumer.email }} </td>
+                        <td> {{ consumer.verify }} </td>
+                        <td> {{ consumer.blockStatus }}</td>
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <!-- End of Consumer TABLE-->
+
+        <h1 style="color: white;">Contributors:</h1>
+        <!-- Contributor table-->
+
+        <div class="row justify-content-center" style="margin-top: 15px">
+            <table class="table">
+                <thead>
+                    <tr>
+
+                        <th scope="col">ID</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Role</th>
+                        <th scope="col">Block Status</th>
+
+
+                    </tr>
+                </thead>
+                <tbody v-for="contributor in contributors" v-bind:key="contributor.id">
+                    <tr>
+                        <th scope="row" data-toggle="modal" data-target="#editContributor"
+                            v-on:click="showContributor(contributor.id)">{{ contributor.id }}</th>
+                        <td> {{ contributor.email }}</td>
+                        <td> {{ contributor.verify }} </td>
+                        <td> {{ contributor.blockStatus }}</td>
+
+
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <!-- End of Contributor TABLE-->
+
+
+        <!-- BLOCK MODAL -->
+
+        <div class="modal fade" id="blockModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Block</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert alert-warning" role="alert">
+                            Choose whom you'd like to block</div>
+                        <form id="formBlock">
+
+                            <div class="form-group">
+                                <label for="Role">What role does the User have?</label>
+                                <select class="form-control" name="blockVerify" id="blockVerify">
+                                    <option>Contributor</option>
+                                    <option>Consumer</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="Name">Type in the email you'd like to block</label>
+                                <input type="text" class="form-control" name="blockEmail" id="blockEmail">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-danger float-right" value="Block this user"
+                                    v-on:click="blockUser">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- BLOCK modal ENDS-->
+
+
+                <!-- UNBLOCK MODAL -->
+
+                <div class="modal fade" id="unblockModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Unblock</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="alert alert-warning" role="alert">
+                                    Choose whom you'd like to unblock</div>
+                                <form id="formunBlock">
+        
+                                    <div class="form-group">
+                                        <label for="Role">What role does the User have?</label>
+                                        <select class="form-control" name="unblockVerify" id="unblockVerify">
+                                            <option>Contributor</option>
+                                            <option>Consumer</option>
+                                        </select>
+                                    </div>
+        
+                                    <div class="form-group">
+                                        <label for="Name">Type in the email you'd like to unblock</label>
+                                        <input type="text" class="form-control" name="unblockEmail" id="unblockEmail">
+                                    </div>
+        
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-warning float-right" value="Unblock this user"
+                                            v-on:click="unblockUser">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- UNBLOCK modal ENDS-->
+
+        <button type="submit" class="btn btn-danger float-right" data-toggle="modal" data-target="#blockModal"
+            style="margin: 10px 10px;">Block a User</button>
+
+            <button type="submit" class="btn btn-warning float-right" data-toggle="modal" data-target="#unblockModal"
+            style="margin: 10px 10px;">Unblock a User</button>
+
+        <button type="submit" class="btn btn-primary float-right" data-toggle="modal" data-target="#addContributorModal"
+            style="margin: 10px 10px;">Add a Contributor</button>
+
+
+            <div class="modal fade" id="addContributorModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Add a Contributor</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="formContributorAdd">
+                                <div class="form-group">
+                                    <label for="Email">Email</label>
+                                    <input type="text" class="form-control" name="addEmail" id="addEmail">
+                                </div>
+            
+                                <div class="form-group">
+                                    <label for="Name">Password</label>
+                                    <input type="text" class="form-control" name="addPassword" id="addPassword">
+                                </div>
+            
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-secondary float-right"
+                                        data-dismiss="modal">Close</button>
+                                        <input type="submit" class="btn btn-primary float-right" data-dismiss="modal" value="Add Contributor"
+                                        v-on:click="addContributor">
+            
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+                        <!-- Update Modal -->
+                        <div class="modal fade" id="editContributor">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Update</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="formUpdate">
+                                            <div class="form-group">
+                                                <label for="Id">Id</label>
+                                                <input type="text" class="form-control" name="contributorID" id="contributorID" readonly>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="Name">First Name</label>
+                                                <input type="text" class="form-control" name="contributorFname" id="contributorFname">
+                                            </div>  
+
+                                            <div class="form-group">
+                                                <label for="Name">Last Name</label>
+                                                <input type="text" class="form-control" name="contributorLname" id="contributorLname">
+                                            </div>  
+
+                                            <div class="form-group">
+                                                <label for="Name">Email</label>
+                                                <input type="text" class="form-control" name="contributorEmail" id="contributorEmail">
+                                            </div>   
+                                            <div class="form-group">
+                                                <button type="submit" class="btn btn-danger float-right"
+                                                    v-on:click="deleteContributor">Delete</button>
+                                                <input type="submit" class="btn btn-primary float-right" value="Save changes"
+                                                    v-on:click="updateContributor">
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+    </div>
+
+
+    <!-- Add a contributor MODAl-->
+
+
+
+    <!-- Edit a Contributor end-->
+
+
+
+
+		    <!-- Footer -->
+			<section id="footer">
+				<div class="container">
+					<div class="row text-center text-xs-center text-sm-left text-md-left">
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							<h5>Quick links</h5>
+							<ul class="list-unstyled quick-links">
+								<li><a href="index.html"><i class="fa fa-angle-double-right"></i>Home</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>About</a></li>
+								<li><a href="faq.html"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>Videos</a></li>
+							</ul>
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							<h5>Quick links</h5>
+							<ul class="list-unstyled quick-links">
+								<li><a href="index.html"><i class="fa fa-angle-double-right"></i>Home</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>About</a></li>
+								<li><a href="faq.html"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+								<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+								<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Videos</a></li>
+							</ul>
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							<h5>Quick links</h5>
+							<ul class="list-unstyled quick-links">
+								<li><a href="index.html"><i class="fa fa-angle-double-right"></i>Home</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>About</a></li>
+								<li><a href="faq.html"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+								<li><a href="https://wwwe.sunlimetech.com" title="Design and developed by"><i class="fa fa-angle-double-right"></i>Imprint</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+							<ul class="list-unstyled list-inline social text-center">
+								<li class="list-inline-item"><a href="www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+								<li class="list-inline-item"><a href="www.twitter.com"><i class="fa fa-twitter"></i></a></li>
+								<li class="list-inline-item"><a href="www.instagram.com"><i class="fa fa-instagram"></i></a></li>
+								<li class="list-inline-item"><a href="www.google.com"><i class="fa fa-google-plus"></i></a></li>
+								<li class="list-inline-item"><a href="www.hotmail.com" target="_blank"><i class="fa fa-envelope"></i></a></li>
+							</ul>
+						</div>
+						<hr>
+					</div>	
+					<div class="row">
+						<div class="col-xs-12 col-s m-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+							<p><u><a href="index.html">SG INDUSTRIES</a></u> is a Registered Peshmerga Kurdish Corporation, Inc. Uppsala [a wholly owned subsidiary of Kirkuk , Mahabad, DON]</p>
+							<p class="h6">© All right Reversed.<a class="text-green ml-2" href="www.google.com" target="_blank">Kurdistan</a></p>
+						</div>
+						<hr>
+					</div>	
+				</div>
+			</section>
+			<!-- ./Footer -->
+
+
+
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+    <script>
+
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                questions: [],
+                consumers: [],
+                contributors: [],
+            },
+            methods: {
+
+                showContributor(id) {
+                    $.ajax({
+                        url: '/contributor/' + id,
+                        type: 'GET',
+                        success: (contributor) => {
+                            $('#contributorEmail').val(contributor.email);
+                            $('#contributorPassword').val(contributor.password);
+                            $('#contributorID').val(contributor.id);
+                        }
+                    });
+                    $('#editContributor').modal('show');
+                },
+
+                blockUser() {
+                    var user = {
+                        email: $('#blockModal #blockEmail').val(),
+                        verify: $('#blockModal #blockVerify').val(),
+
+                    }
+                    $.ajax({
+                        url: '/block',
+                        type: 'PUT',
+                        data: user,
+                        success: () => {
+                            $('#blockModal').modal('hide');
+                        },
+                        error: (error) => {
+                            console.log(error);
+                        }
+                    });
+                },
+
+                unblockUser() {
+                    var user = {
+                        email: $('#unblockModal #unblockEmail').val(),
+                        verify: $('#unblockModal #unblockVerify').val(),
+
+                    }
+                    $.ajax({
+                        url: '/unblock',
+                        type: 'PUT',
+                        data: user,
+                        success: () => {
+                            $('#unblockModal').modal('hide');
+                        },
+                        error: (error) => {
+                            console.log(error);
+                        }
+                    });
+                },
+
+                addContributor() {
+                    var contributor = {
+                        email: $('#addEmail').val(),
+                        password: $('#addPassword').val(),
+                    }
+                    $.ajax({
+                        url: '/add/contributor',
+                        type: 'POST',
+                        data: contributor,
+                        success: () => {
+                            var self = this;
+                            $.getJSON("/contributors", function (jsondata) {
+                                self.contributors = jsondata;
+                                console.log(JSON.stringify(jsondata));
+                                $('#addContributorModal').modal('hide');
+                            });
+                        }
+
+                    });
+                },
+
+                deleteContributor() {
+                    var contributor = {
+                        id: $('#editContributor #contributorID').val()
+                    }
+                    $.ajax({
+                        url: '/delete/contributor/' + contributor.id,
+                        type: 'DELETE',
+                        success: () => {
+                            var self = this;
+                            $.getJSON("/contributors", function (jsondata) {
+                                console.log(JSON.stringify(jsondata));
+                                self.contributors = jsondata;
+                            });
+                        }
+                    });
+                },
+                updateContributor() {
+                    var contributor = {
+                        email: $('#editContributor #contributorEmail').val(),
+                        firstname: $('#editContributor #contributorFname').val(),
+                        lastname: $('#editContributor #contributorLname').val(),
+                        id: $('#editContributor #contributorID').val()
+                    }
+                    $.ajax({
+                        url: '/update/contributor',
+                        type: 'PUT',
+                        data: contributor,
+                        success: () => {
+                            var self = this;
+                            $.getJSON("/contributors", function (jsondata) {
+                                console.log(JSON.stringify(jsondata));
+                                self.contributors = jsondata;
+                                $('#editContributor').modal('hide');
+                            });
+                        },
+                        error: (error) => {
+                            console.log(error);
+                        }
+                    });
+                },
+
+
+            },
+
+            mounted() {
+                var self = this;
+                var self1 = this;
+                var self2 = this;
+                $.getJSON("/question", function (jsondata) {
+                    self.questions = jsondata;
+                    console.log(JSON.stringify(jsondata));
+                }),
+                    $.getJSON("/consumers", function (jsondata) {
+                        self1.consumers = jsondata;
+                        console.log(JSON.stringify(jsondata));
+                    }),
+                    $.getJSON("/contributors", function (jsondata) {
+                        self2.contributors = jsondata;
+                        console.log(JSON.stringify(jsondata));
+                    });
+
+            },
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>

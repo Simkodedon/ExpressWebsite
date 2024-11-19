@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Accordion inspired by: https://www.w3schools.com/howto/howto_js_accordion.asp-->
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+	<link rel="stylesheet" href="main.css"/>
+	<link rel="stylesheet" href="generalcss.css"/>
+	<link rel="stylesheet" href="footer.css"/>
+
+	<title>SG Industries</title>
+</head>
+
+<body>
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<div class="container">
+				<img src="SG.png" alt="SG" style="width:60px;height: 50px;">
+				<a class="navbar-brand" href="index.html">SG Industries</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+					data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+					aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="index.html">Home</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+								data-bs-toggle="dropdown" aria-expanded="false">
+								Dropdown
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<li><a class="dropdown-item" href="products.html">Sale</a></li>
+								<li><a class="dropdown-item" href="admin.html">Admin</a></li>
+								<li><a class="dropdown-item" href="loginas.html">Login</a></li>
+
+								<li>
+									<hr class="dropdown-divider">
+								</li>
+								<li><a class="dropdown-item" href="#">Something else here</a></li>
+							</ul>
+						</li>
+
+					</ul>
+
+					<form class="d-flex">
+						<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+						<button class="btn btn-outline-secondary" type="submit">Search</button>
+					</form>
+
+
+				</div>
+			</div>
+		</nav>
+
+		<!-- Breadcrumbs -->
+		<nav aria-label="breadcrumb bg-dark">
+			<ol class="breadcrumb bg-dark">
+                <li class="breadcrumb-item active" aria-current="page">Home</li>
+                <li class="breadcrumb-item active" aria-current="page">User</li>
+                <li class="breadcrumb-item active" aria-current="page">FAQ</li>
+			</ol>
+		</nav> <!-- Breadcrumbs END -->
+<div class ="FAQ" style ="color:white;">
+        <h2>FAQ</h2>
+
+        <button class="accordion">Electronics</button>
+        <div class="panel">
+			<p>QUESTION: What is your most expensive TV?&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ANSWER: It's called TeleVisjun.</p> 
+            <p>QUESTION: Do you have any insurance?&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp; ANSWER: Yes, ofcourse, it's called qozalkort.</p>
+            <p>QUESTION: What is your cheapest TV?&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ANSWER: It's called ZorHarzan.</p>
+            <p>QUESTION: Do you sell remote controls?&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ANSWER: Yes, it is included with the TV aswell.</p>
+        </div>
+        
+        <button class="accordion">General</button>
+        <div class="panel">
+		  <p>QUESTION: How far to your store? &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;ANSWER: It's 20 km from city.</p>
+		  <p>QUESTION: How many employees do you have? &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ANSWER: We have 300 employees.</p>
+		  <p>QUESTION: Can I apply for a job?&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ANSWER: Yes, ofcourse.</p>
+        </div>
+        
+        <button class="accordion">Food</button>
+        <div class="panel">
+		  <p>QUESTION:  Is dolma nice?&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&ensp;&ensp;&ensp;&emsp;&emsp;&emsp;&emsp;ANSWER: Yes, ofcourse, you will love it.</p>
+		  <p>QUESTION:  Who cooks your food?&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ANSWER: It's our best cook, she is called Daja Gyan.</p>
+		  <p>QUESTION: Is your food healthy?&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; ANSWER: It depends which food you eat..</p>
+        </div>
+        
+        <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+        
+        for (i = 0; i < acc.length; i++) {
+          acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+              panel.style.display = "none";
+            } else {
+              panel.style.display = "block";
+            }
+          });
+        }
+        </script>
+        </div>
+        
+
+	</div>
+	<!-- Optional JavaScript; choose one of the two! -->
+
+	<!-- Option 1: Bootstrap Bundle with Popper -->
+	<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+			    <!-- Footer -->
+				<section id="footer">
+					<div class="container">
+						<div class="row text-center text-xs-center text-sm-left text-md-left">
+							<div class="col-xs-12 col-sm-4 col-md-4">
+								<h5>Quick links</h5>
+								<ul class="list-unstyled quick-links">
+									<li><a href="index.html"><i class="fa fa-angle-double-right"></i>Home</a></li>
+									<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>About</a></li>
+									<li><a href="faq.html"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+									<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+									<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>Videos</a></li>
+								</ul>
+							</div>
+							<div class="col-xs-12 col-sm-4 col-md-4">
+								<h5>Quick links</h5>
+								<ul class="list-unstyled quick-links">
+									<li><a href="index.html"><i class="fa fa-angle-double-right"></i>Home</a></li>
+									<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>About</a></li>
+									<li><a href="faq.html"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+									<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+									<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Videos</a></li>
+								</ul>
+							</div>
+							<div class="col-xs-12 col-sm-4 col-md-4">
+								<h5>Quick links</h5>
+								<ul class="list-unstyled quick-links">
+									<li><a href="index.html"><i class="fa fa-angle-double-right"></i>Home</a></li>
+									<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>About</a></li>
+									<li><a href="faq.html"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+									<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+									<li><a href="https://wwwe.sunlimetech.com" title="Design and developed by"><i class="fa fa-angle-double-right"></i>Imprint</a></li>
+								</ul>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+								<ul class="list-unstyled list-inline social text-center">
+									<li class="list-inline-item"><a href="www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+									<li class="list-inline-item"><a href="www.twitter.com"><i class="fa fa-twitter"></i></a></li>
+									<li class="list-inline-item"><a href="www.instagram.com"><i class="fa fa-instagram"></i></a></li>
+									<li class="list-inline-item"><a href="www.google.com"><i class="fa fa-google-plus"></i></a></li>
+									<li class="list-inline-item"><a href="www.hotmail.com" target="_blank"><i class="fa fa-envelope"></i></a></li>
+								</ul>
+							</div>
+							<hr>
+						</div>	
+						<div class="row">
+							<div class="col-xs-12 col-s m-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+								<p><u><a href="index.html">SG INDUSTRIES</a></u> is a Registered Peshmerga Kurdish Corporation, Inc. Uppsala [a wholly owned subsidiary of Kirkuk , Mahabad, DON]</p>
+								<p class="h6">© All right Reversed.<a class="text-green ml-2" href="www.google.com" target="_blank">Kurdistan</a></p>
+							</div>
+							<hr>
+						</div>	
+					</div>
+				</section>
+				<!-- ./Footer -->
+
+</body>
+
+</html>

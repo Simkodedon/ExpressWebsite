@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+<!-- New version of bootstrap, i'll use the older  one. -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/>    
+    <link rel="stylesheet" href="generalcss.css"/>
+    <link rel="stylesheet" href="footer.css"/>
+        <!-- Scripts -->
+
+
+
+    <title>Admin</title>
+</head>
+
+<body>
+    <div class="container" id="app">
+
+        <!--NAVBAR-->
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <img src="SG.png" alt="SG" style="width:60px;height: 50px;">
+                <a class="navbar-brand" href="index.html">SG Industries</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="products.html">Sale</a></li>
+                                <li><a class="dropdown-item" href="index.html">Home</a></li>
+                                <li><a class="dropdown-item" href="loginas.html">Login</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="admin.html">Admin</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-dark">
+                <li class="breadcrumb-item active" aria-current="page">Home</li>
+                <li class="breadcrumb-item active" aria-current="page">Admin</li>
+            </ol>
+        </nav> <!-- Breadcrumbs END -->
+
+        <!-- Add Button -->
+        <button type="submit" class="btn btn-secondary float-right" data-toggle="modal" data-target="#addModal"
+            style="margin: 10px 10px;">Add Product</button>
+        <!-- Add button END -->
+
+        <!-- Products table -->
+        <div class="row justify-content-center" style="margin-top: 15px">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">ID(Click on ID to edit the product)</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Image</th>
+                    </tr>
+                </thead>
+                <tbody v-for="product in products" v-bind:key="product.id">
+                    <tr>
+                        <th scope="row" data-toggle="modal" data-target="#updateModal"
+                            v-on:click="showProdInUpdateForm(product.id)">{{ product.id }}</th>
+                        <td>{{ product.name }}</td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.price }}</td>
+                        <td>{{ product.image }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> <!-- Products table END -->
+
+
+        <!-- Add Modal -->
+
+        <div class="modal fade" id="addModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Add product</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formAdd">
+                            <div class="form-group">
+                                <label for="Name">Name</label>
+                                <input type="text" class="form-control" name="addName" id="addName">
+                            </div>
+                            <div class="form-group">
+                                <label for="Description">Description</label>
+                                <input type="text" class="form-control" name="addDescription" id="addDescription">
+                            </div>
+                            <div class="form-group">
+                                <label for="Price">Price</label>
+                                <input type="text" class="form-control" name="addPrice" id="addPrice">
+                            </div>
+                            <div class="form-group">
+                                <label for="Image">Image</label>
+                                <input type="text" class="form-control" name="addImage" id="addImage">
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-secondary float-right"
+                                    data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary float-right" data-dismiss="modal" value="Add product"
+                                    v-on:click="addProd">
+                                    
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Add modal END -->
+
+        <!-- Update Modal -->
+        <div class="modal fade" id="updateModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Update</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formUpdate">
+                            <div class="form-group">
+                                <label for="Id">Id</label>
+                                <input type="text" class="form-control" name="updateId" id="updateId" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="Name">Name</label>
+                                <input type="text" class="form-control" name="updateName" id="updateName">
+                            </div>
+                            <div class="form-group">
+                                <label for="Description">Description</label>
+                                <input type="text" class="form-control" name="updateDescription" id="updateDescription">
+                            </div>
+                            <div class="form-group">
+                                <label for="Price">Price</label>
+                                <input type="text" class="form-control" name="updatePrice" id="updatePrice">
+                            </div>  
+                            <div class="form-group">
+                                <label for="Image">Image</label>
+                                <input type="text" class="form-control" name="updateImage" id="updateImage">
+                            </div>    
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-danger float-right"
+                                    v-on:click="deleteProd">Delete</button>
+                                <input type="submit" class="btn btn-primary float-right" value="Save changes"
+                                    v-on:click="updateProd">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+		    <!-- Footer -->
+			<section id="footer">
+				<div class="container">
+					<div class="row text-center text-xs-center text-sm-left text-md-left">
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							<h5>Quick links</h5>
+							<ul class="list-unstyled quick-links">
+								<li><a href="index.html"><i class="fa fa-angle-double-right"></i>Home</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>About</a></li>
+								<li><a href="faq.html"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>Videos</a></li>
+							</ul>
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							<h5>Quick links</h5>
+							<ul class="list-unstyled quick-links">
+								<li><a href="index.html"><i class="fa fa-angle-double-right"></i>Home</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>About</a></li>
+								<li><a href="faq.html"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+								<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+								<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Videos</a></li>
+							</ul>
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							<h5>Quick links</h5>
+							<ul class="list-unstyled quick-links">
+								<li><a href="index.html"><i class="fa fa-angle-double-right"></i>Home</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>About</a></li>
+								<li><a href="faq.html"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+								<li><a href="https://wwwe.sunlimetech.com" title="Design and developed by"><i class="fa fa-angle-double-right"></i>Imprint</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+							<ul class="list-unstyled list-inline social text-center">
+								<li class="list-inline-item"><a href="www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+								<li class="list-inline-item"><a href="www.twitter.com"><i class="fa fa-twitter"></i></a></li>
+								<li class="list-inline-item"><a href="www.instagram.com"><i class="fa fa-instagram"></i></a></li>
+								<li class="list-inline-item"><a href="www.google.com"><i class="fa fa-google-plus"></i></a></li>
+								<li class="list-inline-item"><a href="www.hotmail.com" target="_blank"><i class="fa fa-envelope"></i></a></li>
+							</ul>
+						</div>
+						<hr>
+					</div>	
+					<div class="row">
+						<div class="col-xs-12 col-s m-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+							<p><u><a href="index.html">SG INDUSTRIES</a></u> is a Registered Peshmerga Kurdish Corporation, Inc. Uppsala [a wholly owned subsidiary of Kirkuk , Mahabad, DON]</p>
+							<p class="h6">© All right Reversed.<a class="text-green ml-2" href="www.google.com" target="_blank">Kurdistan</a></p>
+						</div>
+						<hr>
+					</div>	
+				</div>
+			</section>
+			<!-- ./Footer -->
+
+    <!-- New version of bootstrap, didn't work together well with the other code -->
+    
+    <!-- <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+    
+
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                products: []
+            },
+            methods: {
+                showProdInUpdateForm(id) {
+                    $.ajax({
+                        url: '/product/' + id,
+                        type: 'GET',
+                        success: (product) => {
+                            $('#updateId').val(product.id);
+                            $('#updateName').val(product.name);
+                            $('#updateDescription').val(product.description);
+                            $('#updatePrice').val(product.price);
+                            $('#updateImage').val(product.image);
+                        }
+                    });
+                    $('#updateModal').modal('show');
+                },
+                //Add product
+                addProd() {
+                    var product = {
+                        name: $('#addName').val(),
+                        description: $('#addDescription').val(),
+                        price: $('#addPrice').val(),
+                        image: $('#addImage').val(),
+                    }
+                    $.ajax({
+                        url: '/product',
+                        type: 'POST',
+                        data: product,
+                        success: () => {
+                            var self = this;
+                            $.getJSON("/products", function (jsondata) {
+                                self.products = jsondata;
+                                console.log(JSON.stringify(jsondata));
+                                $('#addModal').modal('hide');
+                            });
+                        }
+                        
+                    });
+                },
+                //Delete products
+                deleteProd() {
+                    var product = {
+                        id: $('#updateModal #updateId').val()
+                    }
+                    $.ajax({
+                        url: '/delete/' + product.id,
+                        type: 'DELETE',
+                        success: () => {
+                            var self = this;
+                            $.getJSON("/products", function (jsondata) {
+                                console.log(JSON.stringify(jsondata));
+                                self.products = jsondata;
+                            });
+                        }
+                    });
+                },
+                updateProd() {
+                    var product = {
+                        name: $('#updateModal #updateName').val(),
+                        description: $('#updateModal #updateDescription').val(),
+                        price: $('#updateModal #updatePrice').val(),
+                        image: $('#updateModal #updateImage').val(),
+                        id: $('#updateModal #updateId').val()
+                    }
+                    $.ajax({
+                        url: '/update/' ,
+                        type: 'PUT',
+                        data: product,
+                        success: () => {
+                            var self = this;
+                            $.getJSON("/products", function (jsondata) {
+                                console.log(JSON.stringify(jsondata));
+                                self.products = jsondata;
+                                $('#updateModal').modal('hide');
+                            });
+                        },
+                        error: (error) => {
+                            console.log(error);
+                        }
+                    });
+                }
+            },
+
+            mounted() {
+                var self = this;
+                $.getJSON("/products", function (jsondata) {
+                    console.log(JSON.stringify(jsondata));
+                    self.products = jsondata;
+                });
+            }
+        });
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <!-- New version of bootstrap, i'll use the older  one. -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+
+    <link rel="stylesheet" href="footer.css" />
+    <link rel="stylesheet" href="generalcss.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Scripts -->
+
+
+
+    <title>Login</title>
+</head>
+
+<body>
+    <div class="container" id="app">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <img src="SG.png" alt="SG" style="width:60px;height: 50px;">
+                <a class="navbar-brand" href="index.html">SG Industries</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="products.html">Sale</a></li>
+                                <li><a class="dropdown-item" href="index.html">Home</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="admin.html">Admin</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+
+
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-dark">
+                <li class="breadcrumb-item active" aria-current="page">Home</li>
+                <li class="breadcrumb-item active" aria-current="page">Login</li>
+            </ol>
+        </nav> <!-- Breadcrumbs END -->
+
+        <!-- Add Button -->
+        <button type="submit" class="btn btn-secondary float-left" data-toggle="modal" data-target="#loginModal"
+            style="margin: 10px 10px;">Login as Superadmin</button>
+        <button type="submit" class="btn btn-secondary float-left" data-toggle="modal"
+            data-target="#loginModalContributor" style="margin: 10px 10px;">Login as Contributor</button>
+        <button type="submit" class="btn btn-secondary float-left" data-toggle="modal" data-target="#loginModalConsumer"
+            style="margin: 10px 10px;">Login as Consumer</button>
+            <button type="submit" class="btn btn-secondary float-left" data-toggle="modal" data-target="#createModalConsumer"
+            style="margin: 10px 10px;">Create a new account as a Consumer</button>
+        <!-- Add button END -->
+
+
+
+        <!-- Login Modal for Super Admin-->
+
+        <div class="modal fade" id="loginModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Login as Super Admin</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form id="loginForm">
+                            <div class="form-group">
+                                <label for="Email">Email</label>
+                                <input type="text" class="form-control" name="loginEmail" id="loginEmail">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="text" class="form-control" name="loginPassword" id="loginPassword">
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-secondary float-right"
+                                    data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary float-right" data-dismiss="modal"
+                                    value="Login" v-on:click="loginSuperAdmin">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Detta är LOGIN MODAL FÖR CONTRIBUTOR -->
+
+        <div class="modal fade" id="loginModalContributor">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Login as Contributor</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form id="loginFormContributor">
+                            <div class="form-group">
+                                <label for="Email">Email</label>
+                                <input type="text" class="form-control" name="loginEmail" id="loginEmailCon">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="text" class="form-control" name="loginPassword" id="loginPasswordCon">
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-secondary float-right"
+                                    data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary float-right" data-dismiss="modal"
+                                    value="Login" v-on:click="loginContributor">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Modal för consumer -->
+        <div class="modal fade" id="loginModalConsumer">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Login as Consumer</h5>
+                    </div>
+                    <div class="modal-body">
+                        <form id="loginFormConsumer">
+                            <div class="form-group">
+                                <label for="Email">Email</label>
+                                <input type="text" class="form-control" name="loginEmail" id="loginEmailCons">
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="text" class="form-control" name="loginPassword" id="loginPasswordCons">
+                            </div>
+                            <div class="form-group">
+                                <button type="button" class="btn btn-secondary float-right"
+                                    data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary float-right" data-dismiss="modal"
+                                    value="Login" v-on:click="loginConsumer">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Login modal END -->
+
+
+                <!-- Create Modal för consumer -->
+                <div class="modal fade" id="createModalConsumer">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Type in the new account credentials</h5>
+                            </div>
+                            <div class="modal-body">
+                                <form id="createFormConsumer">
+                                    <div class="form-group">
+                                        <label for="Email">Email</label>
+                                        <input type="text" class="form-control" name="createEmail" id="createEmailCons">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Email">First Name</label>
+                                        <input type="text" class="form-control" name="createEmail" id="createFnameCons">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Email">Last Name</label>
+                                        <input type="text" class="form-control" name="createEmail" id="createLnameCons">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password</label>
+                                        <input type="text" class="form-control" name="createPassword" id="createPasswordCons">
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="button" class="btn btn-secondary float-right"
+                                            data-dismiss="modal">Close</button>
+                                        <input type="submit" class="btn btn-primary float-right" data-dismiss="modal"
+                                            value="Create" v-on:click="createConsumer">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div> <!-- Create modal END -->
+
+    </div>
+
+		    <!-- Footer -->
+			<section id="footer">
+				<div class="container">
+					<div class="row text-center text-xs-center text-sm-left text-md-left">
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							<h5>Quick links</h5>
+							<ul class="list-unstyled quick-links">
+								<li><a href="index.html"><i class="fa fa-angle-double-right"></i>Home</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>About</a></li>
+								<li><a href="faq.html"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>Videos</a></li>
+							</ul>
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							<h5>Quick links</h5>
+							<ul class="list-unstyled quick-links">
+								<li><a href="index.html"><i class="fa fa-angle-double-right"></i>Home</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>About</a></li>
+								<li><a href="faq.html"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+								<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+								<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Videos</a></li>
+							</ul>
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							<h5>Quick links</h5>
+							<ul class="list-unstyled quick-links">
+								<li><a href="index.html"><i class="fa fa-angle-double-right"></i>Home</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>About</a></li>
+								<li><a href="faq.html"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+								<li><a href="https://wwwe.sunlimetech.com" title="Design and developed by"><i class="fa fa-angle-double-right"></i>Imprint</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+							<ul class="list-unstyled list-inline social text-center">
+								<li class="list-inline-item"><a href="www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+								<li class="list-inline-item"><a href="www.twitter.com"><i class="fa fa-twitter"></i></a></li>
+								<li class="list-inline-item"><a href="www.instagram.com"><i class="fa fa-instagram"></i></a></li>
+								<li class="list-inline-item"><a href="www.google.com"><i class="fa fa-google-plus"></i></a></li>
+								<li class="list-inline-item"><a href="www.hotmail.com" target="_blank"><i class="fa fa-envelope"></i></a></li>
+							</ul>
+						</div>
+						<hr>
+					</div>	
+					<div class="row">
+						<div class="col-xs-12 col-s m-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+							<p><u><a href="index.html">SG INDUSTRIES</a></u> is a Registered Peshmerga Kurdish Corporation, Inc. Uppsala [a wholly owned subsidiary of Kirkuk , Mahabad, DON]</p>
+							<p class="h6">© All right Reversed.<a class="text-green ml-2" href="www.google.com" target="_blank">Kurdistan</a></p>
+						</div>
+						<hr>
+					</div>	
+				</div>
+			</section>
+			<!-- ./Footer -->
+
+
+    <!-- New version of bootstrap, didn't work together well with the other code -->
+
+    <!-- <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+
+
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+
+        /*
+        $(document).ready(function(){
+            var email,pass;
+            $("#submit").click(function(){
+                email=$("#loginEmailCon").val();
+                pass=$("#loginPasswordCon").val();
+        
+                $.post("/login",{email:email,pass:pass},function(data){
+                    if(data==='done') {
+                        window.location.href="contributor.html";
+                    }
+                });
+            });
+        });*/
+
+
+    </script>
+
+    
+<script>
+
+        function youBlocked() {
+      alert("If you can't get pass this message, then it means you are blocked or have typed in the wrong password.");
+    }
+
+    function myFunction() {
+      alert("Congratulations, you successfully logged in!");
+    }
+    function accountCreated() {
+      alert("Account Created!");
+    }
+
+
+    </script>
+
+    <script>
+
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                products: []
+            },
+            methods: {
+
+                loginSuperAdmin() {
+                    var logincredentials = {
+                        email: $('#loginEmail').val(),
+                        password: $('#loginPassword').val(),
+                    }
+                    $.ajax({
+                        url: '/login/superadmin',
+                        type: 'POST',
+                        data: logincredentials,
+                        success: () => {
+                            myFunction()
+                            console.log('Detta betyder att vi lyckades');
+                            console.log(JSON.stringify(logincredentials));
+                            // Simulate an HTTP redirect:
+                            window.location.href = "superadmin.html";
+                            $('#loginModal').modal('hide');
+
+                        },
+                        error: () => {
+                            console.log('Wrong CREDS!');
+                        }
+
+                        
+
+                    });
+
+
+                },
+                //Add product
+                loginContributor() {
+                    var logincredentialsCon = {
+                        email: $('#loginEmailCon').val(),
+                        password: $('#loginPasswordCon').val(),
+                    }
+                    $.ajax({
+                        url: '/login/contributor',
+                        type: 'POST',
+                        data: logincredentialsCon,
+                        success: () => {
+                            myFunction()
+                            console.log('Success!')
+                            console.log(JSON.stringify(logincredentialsCon));
+                            window.location.href = "contributor.html";
+                            $('#loginModal').modal('hide');
+
+                        }
+
+                    });
+
+                    youBlocked();
+
+                },
+                //Delete products
+                loginConsumer() {
+                    var logincredentialsCons = {
+                        email: $('#loginEmailCons').val(),
+                        password: $('#loginPasswordCons').val(),
+                    }
+                    $.ajax({
+                        url: '/login/consumer',
+                        type: 'POST',
+                        data: logincredentialsCons,
+                        success: () => {
+                            myFunction();
+                            console.log(JSON.stringify(logincredentialsCons));
+                            window.location.href = "consumer.html";
+                            $('#loginModal').modal('hide');
+                            
+
+                        },
+                        /*
+                        error: () => {
+                            youBlocked();
+                            console.log(JSON.stringify(logincredentialsCons));      // THIS DID NOT WORK, WE HAD TO REFRESH THE PAGE ALL THE TIME FOR THE ALERT TO SHOW ITSELF, AND IT ONLY SHOWED ITSELF FOR A SPLIT OF A SECOND.
+                            $('#loginModal').modal('hide');
+                        },
+                        */
+                    });
+                    
+                    youBlocked();
+                },
+
+                createConsumer() {
+                    var contributor = {
+                        email: $('#createEmailCons').val(),
+                        firstname: $('#createFnameCons').val(),
+                        lastname: $('#createLnameCons').val(),
+                        password: $('#createPasswordCons').val()
+                    }
+                    $.ajax({
+                        url: '/add/consumer',
+                        type: 'POST',
+                        data: contributor,
+                        success: () => {
+                            var self = this;
+                            $.getJSON("/consumers", function (jsondata) {
+                                self.consumers = jsondata;
+                                console.log(JSON.stringify(jsondata));
+                                $('#createConsumerModal').modal('hide');
+                            });
+                        },
+
+                    });
+
+                    accountCreated();
+                }
+
+
+            }
+            
+        });
+
+        
+
+    </script>
+
+
+
+
+
+</body>
+
+</html>

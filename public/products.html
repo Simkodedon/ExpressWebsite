@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="styles.css" />
+	<link rel="stylesheet" href="footer.css"/>
+	<link rel="stylesheet" href="generalcss.css"/>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"/> 
+	<title>SG Industries</title>
+
+	<script src="store.js" async></script>
+</head>
+
+<body>
+
+	<div class="container-fluid" id="app">
+
+		<!-- Detta är början på Nav-->
+		<nav class="navbar navbar-expand-lg navbar-dark">
+			<div class="container-fluid">
+				<img src="SG.png" alt="SG" style="width:60px;height: 50px;">
+				<a class="navbar-brand" href="index.html">SG Industries</a>
+				<button class="navbar-toggler" type="button" data-toggle="collapse"
+					data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+					aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="index.html">Home</a>
+						</li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+								data-toggle="dropdown" aria-expanded="false">
+								Dropdown
+							</a>
+							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+								<li><a class="dropdown-item" href="products.html">Sale</a></li>
+								<li><a class="dropdown-item" href="https://www.du.se/">About</a></li>
+								<li><a class="dropdown-item" href="loginas.html">Login</a></li>
+								<li>
+									<hr class="dropdown-divider">
+								</li>
+								<li><a class="dropdown-item" href="admin.html">Admin</a></li>
+							</ul>
+						</li>
+					</ul>
+					<form class="d-flex " style = "margin-left: 1500px;">
+						<input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+						<button class="btn btn-outline-secondary" type="submit">Search</button>
+					</form>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Detta är slutet på Nav-->
+
+		<!-- Detta är början på cards-->
+
+
+		
+
+		<!-- <div class="row justify-content-center" style="margin-top: 15px">
+			<div class="card" style="width: 18rem;" v-for="product in products" v-bind:key="product.id">
+				<div class="card-body">
+					<img class="card-item-image" src = "SG.png">
+					<h5 class="card-item-title">{{ product.name }}</h5>
+					<p class="card-item-description">{{ product.description }}</p>
+					<p class="card-item-price">{{ product.price }}</p>
+					<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productModal"
+						v-on:click="showProdInDetailedForm(product.id)">
+						View product
+					</button>
+					<button type="button" class="btn btn-primary shop-item-button">
+						Add To cart
+					</button>
+				</div>
+			</div>
+		</div> -->
+
+		<div class="row justify-content-center">
+			<div class="shop-item">
+		<span class="shop-item-title">Dolma</span>
+		<img class="shop-item-image" src="Dolmah.png" width="300" height="200">
+		<div class="shop-item-details">
+			<span class="shop-item-price">$10</span>
+			<button class="btn btn-secondary shop-item-button" type="button">ADD TO CART</button>
+		</div>
+		</div>
+			<div class="shop-item">
+		<span class="shop-item-title">Vin</span>
+		<img class="shop-item-image" src="Wine.png" width="300" height="200">
+		<div class="shop-item-details">
+			<span class="shop-item-price">$500</span>
+			<button class="btn btn-secondary shop-item-button" type="button">ADD TO CART</button>
+		</div>
+		</div>
+		<div class="shop-item">
+			<span class="shop-item-title">Tv</span>
+			<img class="shop-item-image" src="Tv.png" width="300" height="200">
+			<div class="shop-item-details">
+				<span class="shop-item-price">$10000</span>
+				<button class="btn btn-secondary shop-item-button" type="button">ADD TO CART</button>
+			</div>
+			</div>
+	</div>
+		
+
+
+	<!-- Detta är slutet på cards. s-->
+
+
+	<!-- Början på våran shopping cart-->
+
+	<section class="container content-section">
+		<h2 class="section-header">Shopping Cart</h2>
+		<div class="cart-row">
+			<span class="cart-item cart-header cart-column">ITEM</span>
+			<span class="cart-price cart-header cart-column">PRICE</span>
+			<span class="cart-quantity cart-header cart-column">QUANTITY</span>
+		</div>
+		<div class="cart-items">
+			<div class="cart-row">
+				<div class="cart-item cart-column">
+					<img class="cart-item-image" src="SG.png" width="100" height="100">
+					<span class="cart-item-title">Test</span>
+				</div>
+				<span class="cart-prices cart-column">$19.99</span>
+				<div class="cart-quantity cart-column">
+					<input class="cart-quantity-input" type="number" value="1">
+					<button class="btn btn-danger" type="button">REMOVE</button>
+				</div>
+			</div>
+		</div>
+		<div class="cart-total">
+			<strong class="cart-total-title">Total</strong>
+			<span class="cart-total-price">$39.97</span>
+		</div>
+		<button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>
+	</section>
+	<!--
+	<section class="container content-section">
+		<h2 class="section-header">Shopping Cart</h2>
+		<div class="cart-row">
+			<span class="cart-item cart-header cart-column">ITEM</span>
+			<span class="cart-price cart-header cart-column">PRICE</span>
+			<span class="cart-quantity cart-header cart-column">QUANTITY</span>
+		</div>
+		<div class="cart-items">
+		</div>
+		<div class="cart-total">
+			<strong class="cart-total-title">Total</strong>
+			<span class="cart-total-price">$0</span>
+		</div>
+		<button class="btn btn-primary btn-purchase" type="button">PURCHASE</button>
+	</section>
+-->
+
+	<!-- Slutet på Cart-->
+	<!-- Början på Modal-->
+
+	<div class="modal fade" id="productModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Information</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form id="formUpdate">
+						<div class="form-group">
+							<label for="Image">Image</label>
+							<img src="SG.png">
+							<!-- <input type="text" class="form-control" name="productImage" id="productImage" readonly> -->
+						</div>
+						<div class="form-group">
+							<label for="Id">Id</label>
+							<input type="text" class="form-control" name="productId" id="productId" readonly>
+						</div>
+						<div class="shop-item-title">
+							<label for="Name">Name</label>
+							<input type="text" class="form-control" name="productName" id="productName" readonly>
+						</div>
+						<div class="form-group">
+							<label for="Description">Description</label>
+							<input type="text" class="form-control" name="productDescription" id="productDescription"
+								readonly>
+						</div>
+						<div class="shop-item-price">
+							<label for="Price">Price</label>
+							<input type="text" class="form-control" name="productPrice" id="productPrice" readonly>
+						</div>
+						<div class="form-group">
+							<button class="btn btn-primary shop-item-button" type="button">ADD TO CART</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+	<!-- Optional JavaScript; choose one of the two! -->
+
+	<!-- Option 1: Bootstrap Bundle with Popper -->
+	<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+	<script>
+
+		const vm = new Vue({
+			el: "#app",
+			data: {
+				products: [],
+			},
+			methods: {
+
+				showProdInDetailedForm(id) {
+					$.ajax({
+						url: '/product/' + id,
+						type: 'GET',
+						success: (product) => {
+							$('#productId').val(product.id);
+							$('#productName').val(product.name);
+							$('#productDescription').val(product.description);
+							$('#productPrice').val(product.price);
+							$('#productImage').val(product.image);
+						}
+					});
+					$('#productModal').modal('show');
+				},
+			},
+
+			mounted() {
+				var self = this;
+				$.getJSON("/products", function (jsondata) {
+					console.log(JSON.stringify(jsondata));
+					self.products = jsondata;
+				});
+			},
+
+
+
+		});
+
+	</script>
+
+		    <!-- Footer -->
+			<section id="footer">
+				<div class="container">
+					<div class="row text-center text-xs-center text-sm-left text-md-left">
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							<h5>Quick links</h5>
+							<ul class="list-unstyled quick-links">
+								<li><a href="index.html"><i class="fa fa-angle-double-right"></i>Home</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>About</a></li>
+								<li><a href="faq.html"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>Videos</a></li>
+							</ul>
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							<h5>Quick links</h5>
+							<ul class="list-unstyled quick-links">
+								<li><a href="index.html"><i class="fa fa-angle-double-right"></i>Home</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>About</a></li>
+								<li><a href="faq.html"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+								<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+								<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Videos</a></li>
+							</ul>
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							<h5>Quick links</h5>
+							<ul class="list-unstyled quick-links">
+								<li><a href="index.html"><i class="fa fa-angle-double-right"></i>Home</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>About</a></li>
+								<li><a href="faq.html"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+								<li><a href="https://wwwe.sunlimetech.com" title="Design and developed by"><i class="fa fa-angle-double-right"></i>Imprint</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+							<ul class="list-unstyled list-inline social text-center">
+								<li class="list-inline-item"><a href="www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+								<li class="list-inline-item"><a href="www.twitter.com"><i class="fa fa-twitter"></i></a></li>
+								<li class="list-inline-item"><a href="www.instagram.com"><i class="fa fa-instagram"></i></a></li>
+								<li class="list-inline-item"><a href="www.google.com"><i class="fa fa-google-plus"></i></a></li>
+								<li class="list-inline-item"><a href="www.hotmail.com" target="_blank"><i class="fa fa-envelope"></i></a></li>
+							</ul>
+						</div>
+						<hr>
+					</div>	
+					<div class="row">
+						<div class="col-xs-12 col-s m-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+							<p><u><a href="index.html">SG INDUSTRIES</a></u> is a Registered Peshmerga Kurdish Corporation, Inc. Uppsala [a wholly owned subsidiary of Kirkuk , Mahabad, DON]</p>
+							<p class="h6">© All right Reversed.<a class="text-green ml-2" href="www.google.com" target="_blank">Kurdistan</a></p>
+						</div>
+						<hr>
+					</div>	
+				</div>
+			</section>
+			<!-- ./Footer -->
+
+</body>
+
+</html>

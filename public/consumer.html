@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Consumer</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="generalcss.css"/>
+    <link rel="stylesheet" href="footer.css"/>
+
+</head>
+
+<body>
+    <div class="container" id="app">
+
+        <!-- NAVBAR BÖRJAR -->
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container">
+                <img src="SG.png" alt="SG" style="width:60px;height: 50px;">
+                <a class="navbar-brand" href="index.html">SG Industries</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="products.html">Sale</a></li>
+                                <li><a class="dropdown-item" href="index.html">Home</a></li>
+                                <li><a class="dropdown-item" href="loginas.html">Logout</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="admin.html">Admin</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Breadcrumbs -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-dark">
+                <li class="breadcrumb-item active" aria-current="page">Home</li>
+                <li class="breadcrumb-item active" aria-current="page">Login</li>
+                <li class="breadcrumb-item active" aria-current="page">Consumer</li>
+            </ol>
+        </nav> <!-- Breadcrumbs END -->
+
+        <!-- Navbar slutar-->
+        <!-- Ask Question Button -->
+        <button type="submit" class="btn btn-secondary float-right" data-toggle="modal" data-target="#questionModal"
+            style="margin: 10px 10px;">Ask Question</button>
+        <!-- Add button END -->
+        <!-- Början av Question Table-->
+
+
+
+        <div class="row justify-content-center" style="margin-top: 15px">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">QID</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Uploaded</th>
+                        <th scope="col">Answer</th>
+                        <th scope="col">Answered by: </th>
+                    </tr>
+                </thead>
+                <tbody v-for="question in questions" v-bind:key="question.qid">
+                    <tr>
+                        <th scope="row" data-toggle="modal" data-target="#updateModal"
+                            v-on:click="showQuestionInDetailedForm(question.qid)">{{ question.qid }}</th>
+                        <td>{{ question.title }}</td>
+                        <td>{{ question.description }}</td>
+                        <td>{{ question.category }}</td>
+                        <td>{{ question.uploaded }}</td>
+                        <td>{{ question.answer}}</td>
+                        <td>{{ question.username}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <!-- Question MODAL-->
+
+
+
+        <div class="modal fade" id="questionModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">What is your question?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formAdd">
+                            <div class="form-group">
+                                <label for="Name">Title (Max 16 characters)</label>
+                                <input type="text" class="form-control" name="addTitle" id="addTitle">
+
+
+                                <div class="form-group">
+                                    <label for="Name">Question below: (Max 128 characters)</label>
+                                    <input type="text" class="form-control" name="addDescription" id="askDescription">
+                                </div>
+
+                            </div>
+                            <div class="form-group">
+                                <label for="Category">Category</label>
+                                <select class="form-control" name="addCategory" id="addCategory">
+                                    <option>General</option>
+                                    <option>Food</option>
+                                    <option>Electronics</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="button" class="btn btn-secondary float-right"
+                                    data-dismiss="modal">Close</button>
+                                <input type="submit" class="btn btn-primary float-right" data-dismiss="modal"
+                                    value="Submit Question" v-on:click="addQuestion">
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question MODAL END-->
+
+
+        <!-- Update Question Modal -->
+        <div class="modal fade" id="updateModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Update</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="formUpdate">
+                            <div class="form-group">
+                                <label for="Id">QID</label>
+                                <input type="text" class="form-control" name="updateQID" id="updateQID" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="Name">Title (Max 16 characters)</label>
+                                <input type="text" class="form-control" name="updateTitle" id="updateTitle">
+                            </div>
+                            <div class="form-group">
+                                <label for="Description">Description (Max 128 characters)</label>
+                                <input type="text" class="form-control" name="updateDescription" id="updateDescription">
+                            </div>
+                            <div class="form-group">
+                                <label for="Category">Category</label>
+                                <select class="form-control" name="updateCategory" id="updateCategory">
+                                    <option>General</option>
+                                    <option>Food</option>
+                                    <option>Electronics</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-danger float-right"
+                                    v-on:click="deleteQuestion">Delete</button>
+                                <input type="submit" class="btn btn-primary float-right" value="Save changes"
+                                    v-on:click="updateQuestion">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+    </div>
+
+
+		    <!-- Footer -->
+			<section id="footer">
+				<div class="container">
+					<div class="row text-center text-xs-center text-sm-left text-md-left">
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							<h5>Quick links</h5>
+							<ul class="list-unstyled quick-links">
+								<li><a href="index.html"><i class="fa fa-angle-double-right"></i>Home</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>About</a></li>
+								<li><a href="faq.html"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>Videos</a></li>
+							</ul>
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							<h5>Quick links</h5>
+							<ul class="list-unstyled quick-links">
+								<li><a href="index.html"><i class="fa fa-angle-double-right"></i>Home</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>About</a></li>
+								<li><a href="faq.html"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+								<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+								<li><a href="https://www.fiverr.com/share/qb8D02"><i class="fa fa-angle-double-right"></i>Videos</a></li>
+							</ul>
+						</div>
+						<div class="col-xs-12 col-sm-4 col-md-4">
+							<h5>Quick links</h5>
+							<ul class="list-unstyled quick-links">
+								<li><a href="index.html"><i class="fa fa-angle-double-right"></i>Home</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>About</a></li>
+								<li><a href="faq.html"><i class="fa fa-angle-double-right"></i>FAQ</a></li>
+								<li><a href="https://www.du.se/"><i class="fa fa-angle-double-right"></i>Get Started</a></li>
+								<li><a href="https://wwwe.sunlimetech.com" title="Design and developed by"><i class="fa fa-angle-double-right"></i>Imprint</a></li>
+							</ul>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+							<ul class="list-unstyled list-inline social text-center">
+								<li class="list-inline-item"><a href="www.facebook.com"><i class="fa fa-facebook"></i></a></li>
+								<li class="list-inline-item"><a href="www.twitter.com"><i class="fa fa-twitter"></i></a></li>
+								<li class="list-inline-item"><a href="www.instagram.com"><i class="fa fa-instagram"></i></a></li>
+								<li class="list-inline-item"><a href="www.google.com"><i class="fa fa-google-plus"></i></a></li>
+								<li class="list-inline-item"><a href="www.hotmail.com" target="_blank"><i class="fa fa-envelope"></i></a></li>
+							</ul>
+						</div>
+						<hr>
+					</div>	
+					<div class="row">
+						<div class="col-xs-12 col-s m-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+							<p><u><a href="index.html">SG INDUSTRIES</a></u> is a Registered Peshmerga Kurdish Corporation, Inc. Uppsala [a wholly owned subsidiary of Kirkuk , Mahabad, DON]</p>
+							<p class="h6">© All right Reversed.<a class="text-green ml-2" href="www.google.com" target="_blank">Kurdistan</a></p>
+						</div>
+						<hr>
+					</div>	
+				</div>
+			</section>
+			<!-- ./Footer -->
+   
+    
+
+    <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+    <script>
+
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                questions: [],
+            },
+            methods: {
+
+                showQuestionInDetailedForm(qid) {
+                    $.ajax({
+                        url: '/question/' + qid,
+                        type: 'GET',
+                        success: (question) => {
+                            $('#updateQID').val(question.qid);
+                            $('#updateTitle').val(question.title);
+                            $('#updateDescription').val(question.description);
+                            $('#updateCategory').val(question.category);
+                        }
+                    });
+                    $('#updateModal').modal('show');
+                },
+
+                addQuestion() {
+                    var question = {
+                        title: $('#addTitle').val(),
+                        description: $('#askDescription').val(),
+                        category: $('#addCategory').val()
+                    }
+                    $.ajax({
+                        url: '/question',
+                        type: 'POST',
+                        data: question,
+                        success: () => {
+                            var self = this;
+                            $.getJSON("/question", function (jsondata) {
+                                self.questions = jsondata;
+                                console.log(JSON.stringify(question));
+                                $('#questionModal').modal('hide');
+                            });
+                        }
+
+                    });
+                },
+
+
+                deleteQuestion() {
+                    var question = {
+                        qid: $('#updateModal #updateQID').val()
+                    }
+                    $.ajax({
+                        url: '/question/delete/' + question.qid,
+                        type: 'DELETE',
+                        success: () => {
+                            var self = this;
+                            $.getJSON("/question", function (jsondata) {
+                                self.questions = jsondata;
+                            });
+                        }
+                    });
+                },
+                updateQuestion() {
+                    var question = {
+                        title: $('#updateModal #updateTitle').val(),
+                        description: $('#updateModal #updateDescription').val(),
+                        category: $('#updateModal #updateCategory').val(),
+                        qid: $('#updateModal #updateQID').val()
+
+                    }
+                    $.ajax({
+                        url: '/question/update/',
+                        type: 'PUT',
+                        data: question,
+                        success: () => {
+                            var self = this;
+                            $.getJSON("/question", function (jsondata) {
+                                self.questions = jsondata;
+                                console.log(JSON.stringify(jsondata));
+                            });
+
+                            $('#updateModal').modal('hide');
+                        },
+                        error: (error) => {
+                            console.log(error);
+                        }
+                    });
+                }
+            },
+
+            mounted() {
+                var self = this;
+                $.getJSON("/question", function (jsondata) {
+                    self.questions = jsondata;
+                    console.log(JSON.stringify(jsondata));
+                });
+            },
+        });
+
+    </script>
+
+
+</body>
+
+</html>
